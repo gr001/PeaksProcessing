@@ -91,31 +91,20 @@ namespace PeaksProcessing.Processing
 
             int currentWritePosition = 0;
             int currentReadPosition = 0;
-            IEnumerable<double> iterRead = values;
 
             double[] history = new double[m_kernelSize];
 
             int readIndex = 0;
             for (; readIndex < values.Count && currentWritePosition <= m_kernelDescription.Offset; readIndex++)
-            {
                 history[currentWritePosition++] = values[readIndex];
-            }
-
-            //for (; iterRead != end && currentWritePosition <= m_kernelDescription.Offset; ++iterRead)
-            //{
-            //    history[currentWritePosition++] = *iterRead;
-            //}
 
             currentWritePosition = m_kernelDescription.Offset;
 
-            //for (Iter iterWrite = begin; iterWrite != end; ++iterWrite)
             for (int writeIndex = 0; writeIndex < values.Count; writeIndex++)
             {
                 double result = 0;
                 for (int i = -m_kernelDescription.Offset; i < m_kernelSize - m_kernelDescription.Offset; i++)
-                {
                     result += m_kernelDescription.Kernel[i + m_kernelDescription.Offset] * history[(m_kernelSize + currentReadPosition - i) % m_kernelSize];
-                }
 
                 currentWritePosition = (++currentWritePosition) % m_kernelSize;
                 currentReadPosition = (++currentReadPosition) % m_kernelSize;

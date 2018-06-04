@@ -86,7 +86,6 @@
     <Compile Include="Data\StimulusInfo.cs" />
     <Compile Include="Data\Sweep.cs" />
     <Compile Include="DeepCopyByExpressionTrees.cs" />
-    <Compile Include="Processing\Filtration.cs" />
     <Compile Include="Processing\FirFilter.cs" />
     <Compile Include="Processing\Geometry.cs" />
     <Compile Include="Settings\GlobalDetectionSettings.cs" />
