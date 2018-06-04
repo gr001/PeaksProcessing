@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{C18E0448-6EE7-4593-91AE-EA10C0FB068B}</ProjectGuid>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>Bridge</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;__STF__;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>.\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;__STF__;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>.\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_WINDOWS;__STF__;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>.\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_WINDOWS;__STF__;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>.\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Abf\abflib.h" />
+    <ClInclude Include="Abf\axon2\abf2headr.h" />
+    <ClInclude Include="Abf\axon2\ProtocolReaderABF2.hpp" />
+    <ClInclude Include="Abf\axon2\ProtocolStructs.h" />
+    <ClInclude Include="Abf\axon2\SimpleStringCache.hpp" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\abffiles.h" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\abfheadr.h" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\abfoldnx.h" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\abfutil.h" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\AxAbffio32.h" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\csynch.hpp" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\filedesc.hpp" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\msbincvt.h" />
+    <ClInclude Include="Abf\axon\AxAbfFio32\oldheadr.h" />
+    <ClInclude Include="Abf\axon\AxAtfFio32\atfintl.h" />
+    <ClInclude Include="Abf\axon\AxAtfFio32\atfutil.h" />
+    <ClInclude Include="Abf\axon\AxAtfFio32\axatffio32.h" />
+    <ClInclude Include="Abf\axon\Common\adcdac.h" />
+    <ClInclude Include="Abf\axon\Common\ArrayPtr.hpp" />
+    <ClInclude Include="Abf\axon\Common\axodebug.h" />
+    <ClInclude Include="Abf\axon\Common\axodefn.h" />
+    <ClInclude Include="Abf\axon\Common\colors.h" />
+    <ClInclude Include="Abf\axon\Common\FileIO.h" />
+    <ClInclude Include="Abf\axon\Common\FileReadCache.hpp" />
+    <ClInclude Include="Abf\axon\Common\resource.h" />
+    <ClInclude Include="Abf\axon\Common\unix.h" />
+    <ClInclude Include="Abf\axon\Common\wincpp.hpp" />
+    <ClInclude Include="atf\atflib.h" />
+    <ClInclude Include="axg\axglib.h" />
+    <ClInclude Include="axg\AxoGraph_ReadWrite.h" />
+    <ClInclude Include="axg\byteswap.h" />
+    <ClInclude Include="axg\fileUtils.h" />
+    <ClInclude Include="axg\longdef.h" />
+    <ClInclude Include="axg\stringUtils.h" />
+    <ClInclude Include="Bridge.h" />
+    <ClInclude Include="cfs\cfs.h" />
+    <ClInclude Include="cfs\cfslib.h" />
+    <ClInclude Include="cfs\machine.h" />
+    <ClInclude Include="channel.h" />
+    <ClInclude Include="DataReader.h" />
+    <ClInclude Include="heka\hekalib.h" />
+    <ClInclude Include="igor\CrossPlatformFileIO.h" />
+    <ClInclude Include="igor\IgorBin.h" />
+    <ClInclude Include="igor\igorlib.h" />
+    <ClInclude Include="intan\common.h" />
+    <ClInclude Include="intan\intanlib.h" />
+    <ClInclude Include="intan\streams.h" />
+    <ClInclude Include="recording.h" />
+    <ClInclude Include="RecordingNet.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="section.h" />
+    <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="stfio.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Abf\abflib.cpp" />
+    <ClCompile Include="Abf\axon2\abf2headr.cpp" />
+    <ClCompile Include="Abf\axon2\ProtocolReaderABF2.cpp" />
+    <ClCompile Include="Abf\axon2\SimpleStringCache.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\abferror.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\abffiles.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\abfheadr.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\abfhwave.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\abfutil.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\csynch.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\filedesc.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\msbincvt.cpp" />
+    <ClCompile Include="Abf\axon\AxAbfFio32\Oldheadr.cpp" />
+    <ClCompile Include="Abf\axon\AxAtfFio32\axatffio32.cpp" />
+    <ClCompile Include="Abf\axon\AxAtfFio32\fileio2.cpp" />
+    <ClCompile Include="Abf\axon\Common\FileIO.cpp" />
+    <ClCompile Include="Abf\axon\Common\FileReadCache.cpp" />
+    <ClCompile Include="Abf\axon\Common\unix.cpp" />
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="atf\atflib.cpp" />
+    <ClCompile Include="axg\axglib.cpp" />
+    <ClCompile Include="axg\AxoGraph_ReadWrite.cpp" />
+    <ClCompile Include="axg\byteswap.cpp" />
+    <ClCompile Include="axg\fileUtils.cpp" />
+    <ClCompile Include="axg\stringUtils.cpp" />
+    <ClCompile Include="Bridge.cpp" />
+    <ClCompile Include="cfs\cfs.cpp" />
+    <ClCompile Include="cfs\cfslib.cpp" />
+    <ClCompile Include="channel.cpp" />
+    <ClCompile Include="DataReader.cpp" />
+    <ClCompile Include="heka\hekalib.cpp" />
+    <ClCompile Include="igor\CrossPlatformFileIO.cpp" />
+    <ClCompile Include="igor\igorlib.cpp" />
+    <ClInclude Include="igor\WriteWave.h" />
+    <ClCompile Include="intan\common.cpp" />
+    <ClCompile Include="intan\intanlib.cpp" />
+    <ClCompile Include="intan\streams.cpp" />
+    <ClCompile Include="recording.cpp" />
+    <ClCompile Include="section.cpp" />
+    <ClCompile Include="Stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="stfio.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

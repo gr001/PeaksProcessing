@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Research.DynamicDataDisplay.Common.Auxiliary;
+
+namespace DynamicDataDisplay.Markers.DataSources.ValueConverters
+{
+	public static class Converter
+	{
+		public static GenericLambdaConverter<T, object> Create<T>(Func<T, object> lambda)
+		{
+			return new GenericLambdaConverter<T, object>(lambda);
+		}
+	}
+}
