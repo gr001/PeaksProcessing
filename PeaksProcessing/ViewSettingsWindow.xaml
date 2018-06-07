@@ -1,0 +1,54 @@
+﻿<Window x:Class="PeaksProcessing.ViewSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PeaksProcessing"
+        x:Name="root"
+        mc:Ignorable="d"
+        Title="ViewSettings" Height="300" Width="300">
+    <TabControl>
+        <TabItem Header="Peaks detection">
+            <Grid DataContext="{Binding DataViewModel.CurrentDataItem.DataItem, ElementName=root}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Artifacts threshold: "/>
+                <TextBox Grid.Column="1" Text="{Binding ArtifactsThreshold}"/>
+
+                <TextBlock Grid.Row="1" Text="BaseLineSamplesCount: "/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PeakDetectionSettings.BaseLineSamplesCount}"/>
+
+                <TextBlock Grid.Row="2" Text="EndSampleOffsetBeforeArtefact: "/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PeakDetectionSettings.EndSampleOffsetBeforeArtefact}"/>
+
+                <TextBlock Grid.Row="3" Text="PeakThresholdRelativeToBaseline: "/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PeakDetectionSettings.PeakThresholdRelativeToBaseline}"/>
+
+                <TextBlock Grid.Row="4" Text="MaxSlopeBeforePeak: "/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding PeakDetectionSettings.MaxSlopeBeforePeak}"/>
+
+                <TextBlock Grid.Row="5" Text="MaxSlopeAfterPeak: "/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding PeakDetectionSettings.MaxSlopeAfterPeak}"/>
+                <!--<CheckBox IsChecked="{Binding ElementName=root, Path=Settings.GlobalDetectionSettings.PeakDetectionMode}"/>-->
+            </Grid>
+        </TabItem>
+        <TabItem Header="View">
+            <StackPanel>
+                <CheckBox Content="Show signal" IsChecked="{Binding ViewSettings.IsSignalVisible, ElementName=root}"/>
+                <CheckBox Content="Show diff signal" IsChecked="{Binding ViewSettings.IsDiffSignalVisible, ElementName=root}"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</Window>

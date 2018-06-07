@@ -1,0 +1,79 @@
+﻿<Window x:Class="PeaksProcessing.FilesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PeaksProcessing"
+        xmlns:commands="clr-namespace:PeaksProcessing.ViewModel"
+        mc:Ignorable="d"
+        x:Name="root"
+        Title="FilesView" Height="300" Width="300">
+    <Window.Resources>
+        <ResourceDictionary>
+            <local:FilepathToFilenameConverter x:Key="FilepathToFilenameConverter"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="OpenFile(s)" Click="OpenFiles_Click"/>
+            <Button Content="Close all" Click="CloseAllRecordings_Click"/>
+        </StackPanel>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding DataViewModel.DataItems, ElementName=root}" SelectedItem="{Binding DataViewModel.CurrentDataItem, ElementName=root}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Width="20"
+                                Height="20"
+                                Padding="0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=DataItem.IsSaved}" Value="True">
+                                            <Setter Property="Text" Value="S"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        
+                        <Button Grid.Column="1"
+                            Content="x"
+                                Width="20"
+                                Height="20"
+                                Padding="0"
+                                VerticalContentAlignment="Center"
+                              FontSize="15"
+                                Command="{x:Static commands:Commands.CloseRecordingCommand}"
+                                CommandParameter="{Binding DataItem.Recording}"
+                                ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+
+                        <TextBlock  Grid.Column="2" VerticalAlignment="Center" Text="{Binding DataItem.Recording.FilePath, Converter={StaticResource ResourceKey=FilepathToFilenameConverter}}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=DataItem.IsAnalyzed}" Value="True">
+                                            <Setter Property="Foreground" Value="Green"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
