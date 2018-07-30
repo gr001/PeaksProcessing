@@ -1,6 +1,6 @@
 # PeaksProcessing2
 
-This project was created as a part of the **GRANT GACR 14-28334S** to analyze plateau current in patch-clamp recordings. First we detected onset of stimulation artifacts in the recording by:
+This project was created as a part of the **GRANT GACR 14-28334S** to analyze patch-clamp recordings (latency of the first peak in inter-stimulus intervals). First we detected onset of stimulation artifacts in the recording by:
 
 1.	High pass filtering of the recording by a linear phase Gaussian filter to remove low frequency components - sf (filtered signal).
 2.	Robust estimation of noise using median absolute deviation (MAD). The noise variance then estimated as sigma = 1.4826 * MAD(recording).
