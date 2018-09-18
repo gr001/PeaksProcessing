@@ -18,8 +18,15 @@ namespace PeaksProcessing
         public event Action SweepsChanged;
         public event Action ArtifactThresholdChanged;
 
-        internal DataItem(RecordingNet recording)
+        internal DataItem(RecordingNet recording, PeakDetectionModes detectionMode)
         {
+            if (detectionMode == PeakDetectionModes.FirstPeak)
+                this.PeakDetectionSettings = new FirstPeakDetectionSettings();
+            else
+                this.PeakDetectionSettings = new MaximumPeakDetectionSettings();
+
+            m_peakDetectionMode = detectionMode;
+
             this.Recording = recording;
             this.PeakDetectionSettings.Changed += OnPeakDetectionSettings_Changed;
         }
@@ -123,7 +130,7 @@ namespace PeaksProcessing
 
         private void OnPeakDetectionSettings_Changed()
         {
-            Processing.PeaksDetector.DetectPeaks(this, Settings.Settings.Instance.GlobalDetectionSettings.PeakDetectionMode);
+            Processing.PeaksDetectorFactory.DetectPeaks(this);
         }
 
         //public double[] Xs { get; private set; }
@@ -159,6 +166,27 @@ namespace PeaksProcessing
         //    }
         //}
         //SampleValue[] m_stimuliStarts;
+
+        public PeakDetectionModes PeakDetectionMode
+        {
+            get { return m_peakDetectionMode; }
+            set
+            {
+                if (m_peakDetectionMode != value)
+                {
+                    m_peakDetectionMode = value;
+                    if (value == PeakDetectionModes.FirstPeak)
+                        this.PeakDetectionSettings = new FirstPeakDetectionSettings();
+                    else
+                        this.PeakDetectionSettings = new MaximumPeakDetectionSettings();
+
+                    Processing.PeaksDetectorFactory.DetectPeaks(this);
+
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        PeakDetectionModes m_peakDetectionMode = PeakDetectionModes.FirstPeak;
 
         public Sweep[] Sweeps
         {
@@ -204,7 +232,7 @@ namespace PeaksProcessing
                     NotifyPropertyChanged();
 
                     if (recalculateSweeps)
-                        Processing.PeaksDetector.DetectPeaks(this, Settings.Settings.Instance.GlobalDetectionSettings.PeakDetectionMode);
+                        Processing.PeaksDetectorFactory.DetectPeaks(this);
                 }
             }
         }
@@ -244,7 +272,19 @@ namespace PeaksProcessing
         }
         PeakInfo [] m_locatedPeaks;
 
-        public PeakDetectionSettings PeakDetectionSettings { get; } = new PeakDetectionSettings();
+        public PeakDetectionSettingsBase PeakDetectionSettings
+        {
+            get { return m_peakDetectionSettings; }
+            private set
+            {
+                if (m_peakDetectionSettings != value)
+                {
+                    m_peakDetectionSettings = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        PeakDetectionSettingsBase m_peakDetectionSettings = new FirstPeakDetectionSettings();
 
         public bool IsAnalyzed
         {

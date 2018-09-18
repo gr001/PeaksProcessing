@@ -47,7 +47,7 @@ namespace PeaksProcessing
                     m_currentDataItem = value;
 
                     if (value != null && value.DataItem.LocatedPeaks == null)
-                        PeaksDetector.DetectPeaks(value.DataItem, Settings.Settings.Instance.GlobalDetectionSettings.PeakDetectionMode);
+                        PeaksDetectorFactory.DetectPeaks(value.DataItem);
 
                     var handler = CurrentDataItemViewModelChanged;
                     if (handler != null)

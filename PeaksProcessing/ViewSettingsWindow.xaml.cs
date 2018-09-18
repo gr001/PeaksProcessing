@@ -19,6 +19,7 @@ namespace PeaksProcessing
     /// </summary>
     public partial class ViewSettingsWindow : Window
     {
+        public PeaksProcessing.Settings.GlobalDetectionSettings GlobalDetectionSettings { get { return Settings.Settings.Instance.GlobalDetectionSettings; } }
         public PeaksProcessing.Settings.ViewSettings ViewSettings {  get { return Settings.Settings.Instance.ViewSettings; } }
         public DataViewModel DataViewModel {  get { return DataViewModel.Instance; } }
         public ViewSettingsWindow()

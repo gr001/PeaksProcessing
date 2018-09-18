@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bridge;
 using System.Windows;
+using PeaksProcessing.Settings;
 
 namespace PeaksProcessing
 {
@@ -32,12 +33,6 @@ namespace PeaksProcessing
 
         private DataModel()
         {
-            Settings.Settings.Instance.GlobalDetectionSettings.PeakDetectionModeChanged += OnPeakDetectionModeChanged;
-        }
-
-        private void OnPeakDetectionModeChanged()
-        {
-            Parallel.ForEach(m_recordings, (item) => PeaksDetector.DetectPeaks(item, Settings.Settings.Instance.GlobalDetectionSettings.PeakDetectionMode));
         }
 
         public static DataModel Instance
@@ -82,10 +77,12 @@ namespace PeaksProcessing
                 m_recordings.Clear();
                 Fire_DataItemsClosed();
 
-                foreach (var item in recordings)
-                    m_recordings.Add(new DataItem(item));
+                var detectionMode = Settings.Settings.Instance.GlobalDetectionSettings.PeakDetectionMode;
 
-                Parallel.ForEach(m_recordings, (item) => PeaksDetector.DetectPeaks(item, Settings.Settings.Instance.GlobalDetectionSettings.PeakDetectionMode));
+                foreach (var item in recordings)
+                    m_recordings.Add(new DataItem(item, detectionMode));
+
+                Parallel.ForEach(m_recordings, (item) => Processing.PeaksDetectorFactory.DetectPeaks(item));
 
                 var handler = DataItemsLoaded;
                 if (handler != null)

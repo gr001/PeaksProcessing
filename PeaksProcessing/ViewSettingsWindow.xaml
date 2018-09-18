@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PeaksProcessing"
+        xmlns:settings="clr-namespace:PeaksProcessing.Settings"
         x:Name="root"
         mc:Ignorable="d"
         Title="ViewSettings" Height="300" Width="300">
-    <TabControl>
-        <TabItem Header="Peaks detection">
-            <Grid DataContext="{Binding DataViewModel.CurrentDataItem.DataItem, ElementName=root}">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type settings:FirstPeakDetectionSettings}">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -24,31 +25,103 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Artifacts threshold: "/>
-                <TextBox Grid.Column="1" Text="{Binding ArtifactsThreshold}"/>
+                <TextBlock Text="BaseLineSamplesCount: "/>
+                <TextBox Grid.Column="1" Text="{Binding BaseLineSamplesCount}"/>
 
-                <TextBlock Grid.Row="1" Text="BaseLineSamplesCount: "/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PeakDetectionSettings.BaseLineSamplesCount}"/>
+                <TextBlock Grid.Row="1" Text="EndSampleOffsetBeforeArtefact: "/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding EndSampleOffsetBeforeArtefact}"/>
 
-                <TextBlock Grid.Row="2" Text="EndSampleOffsetBeforeArtefact: "/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PeakDetectionSettings.EndSampleOffsetBeforeArtefact}"/>
+                <TextBlock Grid.Row="2" Text="PeakThresholdRelativeToBaseline: "/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PeakThresholdRelativeToBaseline}"/>
 
-                <TextBlock Grid.Row="3" Text="PeakThresholdRelativeToBaseline: "/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PeakDetectionSettings.PeakThresholdRelativeToBaseline}"/>
+                <TextBlock Grid.Row="3" Text="MaxSlopeBeforePeak: "/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MaxSlopeBeforePeak}"/>
 
-                <TextBlock Grid.Row="4" Text="MaxSlopeBeforePeak: "/>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding PeakDetectionSettings.MaxSlopeBeforePeak}"/>
-
-                <TextBlock Grid.Row="5" Text="MaxSlopeAfterPeak: "/>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding PeakDetectionSettings.MaxSlopeAfterPeak}"/>
-                <!--<CheckBox IsChecked="{Binding ElementName=root, Path=Settings.GlobalDetectionSettings.PeakDetectionMode}"/>-->
+                <TextBlock Grid.Row="4" Text="Calculated threshold: "/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CalculatedThreshold, Mode=OneWay}"/>
             </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type settings:MaximumPeakDetectionSettings}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="BaseLineSamplesCount: "/>
+                <TextBox Grid.Column="1" Text="{Binding BaseLineSamplesCount}"/>
+
+                <TextBlock Grid.Row="1" Text="EndSampleOffsetBeforeArtefact: "/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding EndSampleOffsetBeforeArtefact}"/>
+
+                <TextBlock Grid.Row="2" Text="PeakThresholdRelativeToBaseline: "/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PeakThresholdRelativeToBaseline}"/>
+
+                <TextBlock Grid.Row="3" Text="Calculated threshold: "/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CalculatedThreshold, Mode=OneWay}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+    <TabControl>
+        <TabItem Header="Peaks detection">
+            <StackPanel DataContext="{Binding DataViewModel.CurrentDataItem, ElementName=root}">
+                <ContentControl Content="{Binding DataItem.PeakDetectionSettings}"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Artifacts threshold: "/>
+                    <TextBox Grid.Column="1" Text="{Binding DataItem.ArtifactsThreshold}"/>
+
+
+                    <TextBlock Grid.Row="1" Text="Detection mode: "/>
+                    <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type settings:PeakDetectionModes}}}"
+                         SelectedItem="{Binding DataItem.PeakDetectionMode}"/>
+                </Grid>
+            </StackPanel>
         </TabItem>
         <TabItem Header="View">
             <StackPanel>
                 <CheckBox Content="Show signal" IsChecked="{Binding ViewSettings.IsSignalVisible, ElementName=root}"/>
                 <CheckBox Content="Show diff signal" IsChecked="{Binding ViewSettings.IsDiffSignalVisible, ElementName=root}"/>
             </StackPanel>
+        </TabItem>
+        <TabItem Header="Global settings">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Detection mode: "/>
+                <ListBox Grid.Column="1" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type settings:PeakDetectionModes}}}"
+                         SelectedItem="{Binding GlobalDetectionSettings.PeakDetectionMode, ElementName=root}"/>
+            </Grid>
+            
         </TabItem>
     </TabControl>
 </Window>

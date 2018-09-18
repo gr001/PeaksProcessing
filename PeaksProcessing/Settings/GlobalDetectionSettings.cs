@@ -14,8 +14,6 @@ namespace PeaksProcessing.Settings
 
     public sealed class GlobalDetectionSettings : Notifiable
     {
-        public event Action PeakDetectionModeChanged;
-
         public PeakDetectionModes PeakDetectionMode
         {
             get { return m_peakDetectionMode; }
@@ -24,15 +22,24 @@ namespace PeaksProcessing.Settings
                 if (m_peakDetectionMode != value)
                 {
                     m_peakDetectionMode = value;
-                    var handler = PeakDetectionModeChanged;
-                    if (handler != null)
-                        handler();
-
                     NotifyPropertyChanged();
                 }
             }
         }
-
         PeakDetectionModes m_peakDetectionMode = PeakDetectionModes.FirstPeak;
+
+        public bool InvertedSignal
+        {
+            get { return m_invertedSignal; }
+            set
+            {
+                if (m_invertedSignal != value)
+                {
+                    m_invertedSignal = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        bool m_invertedSignal = false;
     }
 }
